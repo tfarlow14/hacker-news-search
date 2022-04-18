@@ -9,9 +9,9 @@ export default function Search() {
 
   const [query, setQuery] = useState('')
   const [tags, setTags] = useState(null)
-  const [numericFilter, setNumericFilter] = useState(null)
-  const [operator, setOperator] = useState(null)
-  const [numberValue, setNumberValue] = useState(null)
+  // const [numericFilter, setNumericFilter] = useState(null)
+  // const [operator, setOperator] = useState(null)
+  // const [numberValue, setNumberValue] = useState(null)
   const [page, setPage] = useState(1)
   const [maxPages, setMaxPages] = useState(null)
   const [articles, setArticles] = useState([])
@@ -21,10 +21,10 @@ export default function Search() {
     const { data } = await axios.get('https://hn.algolia.com/api/v1/search', { params: {
       query,
       tags,
-      numericFilter: numericFilter && operator && numberValue ? `${numericFilter}${operator}${numberValue}` : null,
+      // numericFilter: numericFilter && operator && numberValue ? `${numericFilter}${operator}${numberValue}` : null,
       page
     } })
-    setSearchHistory([...searchHistory, `https://hn.algolia.com/api/v1/search?query=${query}&tags=${tags}`])
+    setSearchHistory([...searchHistory, `https://hn.algolia.com/api/v1/search?query=${query}&tags=${tags}&page=${page}`])
     setArticles(data.hits)
     setMaxPages(data.nbPages)
   }
@@ -75,43 +75,6 @@ export default function Search() {
                     {value: 'story_', label: 'story_:ID'},
                   ]}
                 />
-              </Grid.Col>
-              <Grid.Col span={12}>
-                <label><small>Filter by Numeric Metric:</small></label>
-                <Grid>
-                  <Grid.Col span={6}>
-                    <Select
-                      // label="Filter by Numeric Metric:"
-                      placeholder="Numeric Filter"
-                      value={numericFilter}
-                      onChange={ (value) => setNumericFilter(value) }
-                      data={[
-                        {value: 'created_at_i', label: 'created_at_i'},
-                        {value: 'points', label: 'points'},
-                        {value: 'num_comments', label: 'num_comments'}
-                      ]}
-                    />
-                  </Grid.Col>
-                  <Grid.Col span={3}>
-                    <Select
-                      value={operator}
-                      onChange={ (value) => { setOperator(value)} }
-                      data={[
-                        {value: '<', label: '<'},
-                        {value: '<=', label: '<='},
-                        {value: '=', label: '='},
-                        {value: '>', label: '>'},
-                        {value: '>=', label: '>='}
-                      ]}
-                    />
-                  </Grid.Col>
-                  <Grid.Col span={3}>
-                    <NumberInput
-                      value={numberValue}
-                      onChange={(value) => setNumberValue(value)}
-                    />
-                  </Grid.Col>
-                </Grid>
               </Grid.Col>
               <Grid.Col span={12}>
                 <Button
