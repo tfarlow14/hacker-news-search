@@ -14,3 +14,28 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.search {
+  align-items: top;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px; 
+}
+
+.title {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.topPagination {
+ margin-bottom: 25px;
+}
+
+.bottomPagination {
+  margin-top: 25px;
+}
+
+.article {
+  margin-bottom: 10px;
+}
